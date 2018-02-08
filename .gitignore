@@ -1,4 +1,8 @@
 *.vcxproj
 *.filters
 *.sln
-debug\
+*.user
+*.vs/
+*.tlog
+.vs\
+Debug/
