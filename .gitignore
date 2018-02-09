@@ -5,4 +5,7 @@
 *.vs/
 *.tlog
 .vs\
+*.txt
+*students
+Release/
 Debug/
