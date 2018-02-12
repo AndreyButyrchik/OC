@@ -1,15 +1,15 @@
 #include <windows.h>
 #include <tchar.h>
 #include <stdio.h>
-#include <locale.h>
+
 typedef struct _student
 {
 	TCHAR name[10];
 	int grade;
 	double num;
-}student;
+} student;
 
-int loadNodes(int cNodes, student* nodes)// ! add verification of input data
+int loadNodes(int cNodes, student* nodes)
 {
 	_tprintf_s(TEXT("Please, enter %d notes of students. Example:\nName (Andrey)\nGroup (13)\nAverage mark (7.5)\n"), cNodes);
 	for (int i = 0; i < cNodes; i++)
@@ -25,17 +25,9 @@ int loadNodes(int cNodes, student* nodes)// ! add verification of input data
 int writeBin(TCHAR* fileName, student* nodes, int cNodes)
 {
 	FILE* fStudBin;
-	errno_t err;// error code
-	err = _tfopen_s(&fStudBin, fileName, TEXT("wb"));// create binary file to write
-	if (err != 0)
-	{
-		_tprintf_s(TEXT("Binary file wasn't created. Error code: %d"), err);
-		return 0;
-	}
+	_tfopen_s(&fStudBin, fileName, TEXT("wb"));// create binary file to write
 	for (int i = 0; i < cNodes; i++)
-	{
 		fwrite(&nodes[i], sizeof(student), 1, fStudBin);
-	}
 	fclose(fStudBin);
 	return 0;
 }

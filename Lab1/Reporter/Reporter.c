@@ -28,7 +28,7 @@ int writeNodes(student* nodes, TCHAR* fileName, TCHAR* fBinName, double num, int
 	{
 		if (nodes[i].num > num)
 		{
-			_ftprintf_s(fReport, TEXT("Node ¹%d:\n\tName: %s\n\tGrade: %d\n\tAverage mark: %.1lF\n"), (i + 1), nodes[i].name, nodes[i].grade, nodes[i].num);
+			_ftprintf_s(fReport, TEXT("Node %d:\n\tName: %s\n\tGrade: %d\n\tAverage mark: %.1lF\n"), (i + 1), nodes[i].name, nodes[i].grade, nodes[i].num);
 		}
 	}
 	fclose(fReport);
@@ -37,9 +37,9 @@ int writeNodes(student* nodes, TCHAR* fileName, TCHAR* fBinName, double num, int
 
 int _tmain(int argc, TCHAR* argv[])
 {
-	student* nodes = (student*)malloc(sizeof(student)*10);// struct array !FIX
+	student* nodes = (student*)malloc(sizeof(student)*10);						// struct array 
 	TCHAR* fileName = (TCHAR*)malloc(sizeof(TCHAR)*(_tcslen(argv[2]) + 5));
-	_tcscpy_s(fileName, sizeof(TCHAR)*(_tcslen(argv[2])), argv[2]); // "filename"+.txt
+	_tcscpy_s(fileName, sizeof(TCHAR)*(_tcslen(argv[2])), argv[2]);				// "filename"+.txt
 	_tcscat_s(fileName, sizeof(TCHAR)*(_tcslen(argv[2])), TEXT(".txt"));
 	int cNodes = getBinNodes(argv[1], nodes);
 	writeNodes(nodes, fileName, argv[1], _ttof(argv[3]), cNodes);

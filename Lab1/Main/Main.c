@@ -11,24 +11,13 @@ typedef struct _student
 
 int printBinFile(TCHAR* fBinName)
 {
-	//FILE* fStudBin;
-	//_tfopen_s(&fStudBin, fBinName, TEXT("rb"));
-	//student* nodes = (student*)malloc(sizeof(student) * 10);// struct array !FIX
-	//int i = 0;
-	//while (fread(&nodes[i], sizeof(fBinName), 1, fStudBin))
-	//{
-	//	_tprintf_s(TEXT("Node ¹%d:\n\tName: %s\n\tGrade: %d\n\tAverage mark: %.1lF\n"), (i + 1), nodes[i].name, nodes[i].grade, nodes[i].num);
-	//	i++;
-	//}
-	//fclose(fStudBin);
-	student* nodes = (student*)malloc(sizeof(student) * 10);// struct array !FIX
+	student* nodes = (student*)malloc(sizeof(student) * 10);
 	FILE* fStudBin;
 	_tfopen_s(&fStudBin, fBinName, TEXT("rb"));
 	int i = 0;
 	while (fread(&nodes[i], sizeof(student), 1, fStudBin))
 	{ 
-		_tprintf_s(TEXT("Node %d:\n\tName: %s\n\tGrade: %d\n\tAverage mark: %.1lF\n"), (i + 1), nodes[i].name, nodes[i].grade, nodes[i].num);
-		i++;
+		_tprintf_s(TEXT("Node %d:\n\tName: %s\n\tGrade: %d\n\tAverage mark: %.1lF\n"), (i++), nodes[i].name, nodes[i].grade, nodes[i].num);
 	}
 	fclose(fStudBin);
 	free(nodes);
@@ -43,7 +32,6 @@ int printRepFile(TCHAR* fRepName)
 	while (_fgetts(buff, 2, fReport))
 	{
 		_tprintf_s(TEXT("%s"), buff);
-
 	}
 	fclose(fReport);
 	return 0;
@@ -57,7 +45,6 @@ int _tmain(int argc, TCHAR* argv[])
 	_tscanf_s(TEXT("%s"), fBinName, (unsigned)_countof(fBinName));
 	_tprintf_s(TEXT("Please, enter count of nodes.\n"));
 	_tscanf_s(TEXT("%s"), cNodes, (unsigned)_countof(cNodes));
-
 
 	TCHAR conArgCreator[30];
 	_tcscpy_s(conArgCreator, _countof(conArgCreator), TEXT("Creator "));
@@ -98,10 +85,7 @@ int _tmain(int argc, TCHAR* argv[])
 	PROCESS_INFORMATION piRep;
 	ZeroMemory(&siRep, sizeof(STARTUPINFO));
 	siRep.cb = sizeof(STARTUPINFO);
-	if (!CreateProcessW(NULL, conArgReport, NULL, NULL, FALSE, CREATE_NEW_CONSOLE, NULL, NULL, &siRep, &piRep))
-	{
-		_tprintf_s("EEE");
-	}
+	CreateProcessW(NULL, conArgReport, NULL, NULL, FALSE, CREATE_NEW_CONSOLE, NULL, NULL, &siRep, &piRep);
 	WaitForSingleObject(piRep.hProcess, INFINITE);
 	CloseHandle(piRep.hProcess);
 	CloseHandle(piRep.hThread);
