@@ -90,7 +90,6 @@ int _tmain(int argc, TCHAR* argv[])
 	CloseHandle(piRep.hProcess);
 	CloseHandle(piRep.hThread);
 
-
 	_tcscat_s(fRepName, _countof(fRepName), TEXT(".txt"));
 	printRepFile(fRepName);
 
